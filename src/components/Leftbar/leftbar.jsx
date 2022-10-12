@@ -3,8 +3,10 @@ import "./leftbar.css"
 function Leftbar (){
     return(
         <div className="leftbar">
-            leeft bar
+        <img src="images/leftbar.PNG" className="leftbar" alt="" />
+
         </div>
+
     );
 }
 

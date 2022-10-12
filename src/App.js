@@ -1,9 +1,9 @@
 // import logo from './logo.svg';
 import './App.css';
 import Centerpost from "./components/Centerpost"
-import Leftbar from "./components/Leftbar"
-import Rightbar from "./components/Rightbar"
-import Navbar from './components/Navbar'
+import Leftbar from "./components/Leftbar/leftbar"
+import Rightbar from "./components/Rightbar/rightbar"
+import Navbar from './components/Navbar/navbar'
 function App() {
   return (
   //  div className="App">

@@ -1,0 +1,26 @@
+.navbar{
+    position: fixed;
+/* border: 1px solid black; */
+width: 1250px;
+display: flex;
+justify-content:space-between;
+}
+.fb{
+    width: 60px;
+height: 50px;}
+#inp{
+    margin-top: 6px;
+    margin-right: 800px;
+    height: 40px;width: 200px;
+    background-color: aliceblue;
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+}
+.group{    width: 40px;
+    height: 40px;}
+.home{   
+     width: 40px;
+    height: 40px;}
+.notification{    width: 40px;
+    height: 40px;}

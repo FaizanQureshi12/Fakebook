@@ -1,7 +1,8 @@
-.rightbar{border: 1px solid black;
-width: 200px;
-height: 300px;
-position: relative;
-left: 1060px;
-bottom: 2200px;
+.rightbar{
+    width: 400px;
+    height: 550px;
+position: absolute;
+left: 860px;
+bottom: 3px;
+position: fixed;
 }

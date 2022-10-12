@@ -1,3 +1,5 @@
-.leftbar{border: 1px solid black;
-width: 200px;
-height: 400px;}
+.leftbar{
+    margin-top: 28px;
+width: 400px;
+height: 550px;
+position: fixed;}
