@@ -1,8 +1,9 @@
 .rightbar{
+    /* border: 3px solid black; */
     width: 400px;
-    height: 550px;
+    height: 600px;
 position: absolute;
-left: 860px;
-bottom: 3px;
+left: 990px;
+bottom: 18px;
 position: fixed;
 }

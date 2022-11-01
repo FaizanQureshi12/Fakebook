@@ -1,18 +1,20 @@
 .centerpost{
-    display: flex;flex-direction: column;align-items: center;}
+    display: flex;
+    flex-direction: column;align-items: center;
+background-color:#F0F2F5;}
 .Capture{    
-    width: 430px;
+    width: 490px;
     box-shadow: 1px 1px 3px 3px black;
 margin-bottom: 10px;
 margin-top: 60px; 
-   border-radius: 20px;
+   border-radius: 10px;
 height: 500px;
 }
 
 
 .post{ border: 1px solid black;
-    border-radius: 10px;
-    width: 380px;
+    border-radius: 5px;
+    width: 450px;
     padding: 20px;
     box-shadow: 1px 1px 3px 3px black;
     margin-bottom: 10px;
@@ -20,7 +22,8 @@ height: 500px;
 
     .postheader{display: flex;align-items: center;margin-bottom: 2px;}
  .post .profilePhoto{width: 55px;height: 50px;border-radius: 50%;margin: 10px;}
- .post .postImage{width: 380px;height: 230px;margin-top: 5px;
+ .post .postImage{
+    width: 450px;height: 330px;margin-top: 5px;
     margin-bottom: 5px;}
  .post .profileName{padding-top: 0px;}
  .post .postFooter{display: flex;justify-content: space-around;
