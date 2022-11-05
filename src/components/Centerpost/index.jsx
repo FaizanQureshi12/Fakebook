@@ -1,5 +1,8 @@
 import "./index.css"
-// import moment from 'moment'  
+// import moment from 'moment' 
+import { MdAddAPhoto } from 'react-icons/md'; 
+import { AiOutlineVideoCameraAdd } from 'react-icons/ai'; 
+import { BsEmojiSmile } from 'react-icons/bs'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp, faComment, faShare } from '@fortawesome/free-solid-svg-icons'
 
@@ -8,6 +11,21 @@ function Centerpost(){
     <div className="centerpost">
         <img src="images/Capture.png" className="Capture" alt="" />
 
+<div className="dopost">
+<form action="">
+<img src="images/Profile.jpg" className="Profile" alt="" />
+    <textarea name=""placeholder="What's in your mind, Faizan? " id="" ></textarea>
+<br /> 
+<hr />
+<div className="emoji">
+<AiOutlineVideoCameraAdd/> Live video
+<input type="file" name="photo" id="photo"  />
+ <MdAddAPhoto />
+<label htmlFor="photo">Photo</label>
+<BsEmojiSmile/>Feeling/activity
+</div>
+</form>
+</div>
 <div className="post"> 
 <div className="postheader">
     <img alt="profile" className="profilePhoto" src="https://i0.wp.com/digital-photography-school.com/wp-content/uploads/2016/02/Headshot-Photography-London-0997.jpg?ssl=1"  /> 
