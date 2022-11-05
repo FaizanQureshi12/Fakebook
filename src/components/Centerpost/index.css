@@ -10,6 +10,19 @@ margin-top: 60px;
    border-radius: 10px;
 height: 500px;
 }
+.dopost{background-color: white;
+padding: 10px;
+margin: 20px;
+border-radius: 10px;
+}
+.emoji{
+    display: flex;
+    justify-content:space-around
+    ;}
+
+#photo{
+    /* visibility: hidden; */
+width: 0px;}
 
 
 .post{ border: 1px solid black;
