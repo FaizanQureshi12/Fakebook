@@ -3,22 +3,34 @@
     flex-direction: column;align-items: center;
 background-color:#F0F2F5;}
 .Capture{    
-    width: 490px;
+    width: 520px;
     box-shadow: 1px 1px 3px 3px black;
-margin-bottom: 10px;
-margin-top: 60px; 
+margin-bottom: 2px;
+margin-top: 30px; 
    border-radius: 10px;
-height: 500px;
+height: 350px;
 }
-.dopost{background-color: white;
+.dopost{
+    display: flex;
+    background-color: white;
 padding: 10px;
 margin: 20px;
 border-radius: 10px;
+width: 490px;
+height: 120px;
 }
+.box{
+    padding: 5px;
+    border: none;
+    border-radius: 30px;
+    width: 400px;
+    height: 30px;
+background-color: #F0F2F5;}
+
 .emoji{
-    display: flex;
-    justify-content:space-around
-    ;}
+        display: flex;
+    justify-content:space-between;
+    }
 
 #photo{
     /* visibility: hidden; */
