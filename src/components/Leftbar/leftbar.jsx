@@ -4,7 +4,7 @@ function Leftbar (){
     return(
         <div className="leftbar">
 
-        <img src="images/leftbar.PNG" className="leftbar" alt="" />
+        {/* <img src="images/leftbar.PNG" className="leftbar" alt="" /> */}
 
         </div>
 

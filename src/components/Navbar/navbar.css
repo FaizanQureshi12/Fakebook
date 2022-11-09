@@ -3,7 +3,7 @@
 /* border: 1px solid black; */
 width: 1400px;
 display: flex;
-justify-content:space-evenly;
+/* justify-content:space-evenly; */
 background-color: white;
 }
 .fb{
@@ -18,17 +18,39 @@ height: 50px;}
     border: none;
     padding: 10px;
 }
+.hlink{
+    width: 520px;
+display: flex;
+justify-content: space-between;
+position: absolute;
+left: 450px;
+top:9px;}
 
-
+.ricon{
+    display: flex;
+    justify-content: space-evenly;
+    width: 300px;
+    margin-left: 100px;
+}
 .group{    
     width: 40px;
     height: 40px;}
 .home{   
      width: 40px;
     height: 40px;}
+
+    .plus{
+        background-color: aliceblue;
+        width: 30px;
+        height: 30px;    border-radius: 50px; 
+padding: 8px;
+font-weight: bolder;
+font-size: x-large;
+    }
 .notification{    width: 40px;
     height: 40px;}
     .Profile{   
-         width: 60px;
+         width: 55px;
         height: 50px;
-    border-radius: 30px; margin: 3px;}
+    border-radius: 30px; 
+    margin: 1px;}
