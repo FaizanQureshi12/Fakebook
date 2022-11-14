@@ -1,18 +1,14 @@
-import "./index.css"
-// import moment from 'moment'
-// import axios from 'axios'; 
+import "./index.css";
+import moment from 'moment'
+import{useState, useEffect} from 'react'
+import { BsEmojiSmile } from 'react-icons/bs'; 
+import { initializeApp } from "firebase/app";
 import { MdAddAPhoto } from 'react-icons/md'; 
 import { AiOutlineVideoCameraAdd } from 'react-icons/ai'; 
-import { BsEmojiSmile } from 'react-icons/bs'; 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faThumbsUp, faComment, faShare } from '@fortawesome/free-solid-svg-icons'
-import{useState,
-  useEffect
-} from 'react' 
-import { initializeApp } from "firebase/app";
-import { getFirestore ,
-  // collection, addDoc
-} from "firebase/firestore";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsUp, faComment, faShare } from '@fortawesome/free-solid-svg-icons'
+import { getFirestore ,onSnapshot,query, serverTimestamp, orderBy, 
+  deleteDoc,collection,addDoc, doc, updateDoc ,} from "firebase/firestore";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -28,61 +24,85 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
-
-
 
 function Centerpost(){
     const [postText,setPostText]=useState("");
     const [posts,setPosts]=useState([]);
-    const [isLoading, setIsLoading]=useState(false);
+    const[editing,setEditing]=useState({
+      editingId:null, editingText:''
+    })
 
     useEffect(()=>{
-
+ 
+    let unsubscribe = null;
+    const getRealtimeData = async()=>{
+    const q = query(collection(db, "posts") ,orderBy('createdOn','desc'));
+       unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const posts = [];
+        querySnapshot.forEach((doc) => {
+        posts.push({ id: doc.id, ...doc.data() });
+        });
+        setPosts(posts);
+        console.log("posts: ", posts);
+      });
+    }
+        getRealtimeData()
+        return () => {
+          console.log("Cleanup function");
+          unsubscribe();
+        }
     },[])
 
-    const savePost =  (e)=>{
-        e.preventDefualt();
-        // try {
-    //   const docRef = await addDoc(collection(db, "posts"), {
-    //     text: "postText",
-    //   createdOn: new Date().getTime(),
-    //     born: 1815
-    //   });
-    //   console.log("Document written with ID: ", docRef.id);
-    // } catch (e) {
-    //   console.error("Error adding document: ", e);
-    // }
-               
-    }
-    console.log("postText:",postText);
+    const savePost = async (e)=>{
+        e.preventDefault();
+        console.log("postText:",postText);
+        try {
+      const docRef = await addDoc(collection(db, "posts"), {
+        text: postText,
+      createdOn:serverTimestamp(),
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e); }    
+  }
+  
+  const deletePost = async (postId) => {
+    console.log("postId: ", postId);
+    await deleteDoc(doc(db, "posts", postId));
+  }
 
+  const updatePost = async (e) => {
+    e.preventDefault();
+       await updateDoc(doc(db, "posts", editing.editingId), {
+      text: editing.editingText
+    });
+    setEditing({
+      editingId: null,
+      editingText: ""
+    })
+     }  
 
-    
-    return (
+  return (
 
     <div className="centerpost">
-        <img src="images/Capture 2.png" className="Capture 2" alt="" />
+    <img src="images/Capture 2.png" className="Capture 2" alt="" />
 
 <div className="dopost">
-    {/* <img src="images/Profile.jpg" className="Profile" alt="" /> */}
 
+<img src="images/Profile.jpg" className="Profile" alt="" />
 <form onSubmit={savePost}>
-    <textarea type="text" 
-    // className="box"  
-    // value={postText}
+    <textarea 
+    type="text" 
+    className="inp"  
     placeholder="What's in your mind, Faizan?"
      onChange={(e) => {
-        setPostText(e.target.value)
-      }} 
+        setPostText(e.target.value)}}       
       />
     <button type="submit" >Post</button>
-    </form>
 <br /> 
 <hr />
-
 
 <div className="emoji">
 <AiOutlineVideoCameraAdd/> Live video
@@ -91,8 +111,57 @@ function Centerpost(){
 <label htmlFor="photo">Photo</label>
 <BsEmojiSmile/>Feeling/activity
 </div>
+</form>
 </div>
-{/* 
+
+<div>
+{posts.map((eachPost , i) =>(
+  <div className="post" key={i}>
+    <span>{
+      moment(
+        (eachPost?.createdOn?.seconds) ?
+          eachPost?.createdOn?.seconds * 1000 : undefined
+          ).format('Do MMMM,yy, h:mm a')
+      }</span>      
+
+   <button onClick={()=>{
+      deletePost(eachPost?.id)
+    }}    >Delete Post
+    </button>
+
+    {(editing.editingId === eachPost?.id)?null:
+    <button onClick={()=>{ setEditing({      
+        editingId:eachPost?.id,
+        editingText:eachPost?.text
+      })
+      }} >Edit</button>}
+
+<select name="" id="">
+  <option value="">
+    <button >Edit Post</button>
+      </option>
+  <option value=""></option>
+  <option value=""><button></button></option>
+  <option value=""><button></button></option>
+    </select>
+
+<p>
+  {(eachPost.id === editing.editingId)? 
+<form onSubmit={updatePost}>
+<input type='text'
+value={editing.editingText}
+onChange={(e)=>{ setEditing({ ...editing,  
+  editingText: e.target.value }) }}
+  />
+<button type="submit">Update</button>
+</form>
+: 
+eachPost?.text}
+</p>
+  </div>
+))}
+</div>
+
 <div className="post"> 
 <div className="postheader">
     <img alt="profile" className="profilePhoto" src="https://i0.wp.com/digital-photography-school.com/wp-content/uploads/2016/02/Headshot-Photography-London-0997.jpg?ssl=1"  /> 
@@ -109,25 +178,6 @@ or other specific organizations that also use the term.
      </div>
      <hr />
 </div>
-
-<div className="post" >
-    <div className="postheader">
-    <img alt="profile" className="profilePhoto" src="https://images.ctfassets.net/u0haasspfa6q/5FkFXNFQdW4j7PMJwTrMO2/a290555f887a2ca3050290d53dd9ccf6/malvestida-magazine-295605-unsplash"  />
-    Hamza <br />  
-    14-April-2015
-    </div>
-
- This article is about the decentralized social movement. Not to be confused with Black Lives Matter Global Network Foundation, 
-or other specific organizations that also use the term.
-<img  alt="postimage" className="postImage" src="https://thumbs.dreamstime.com/b/beautiful-rain-forest-ang-ka-nature-trail-doi-inthanon-national-park-thailand-36703721.jpg" />
-<hr />
-    <div className='postFooter'>
-       <div><FontAwesomeIcon icon={faThumbsUp} />Like</div>
-       <div><FontAwesomeIcon icon={faComment} />Comment</div>
-       <div><FontAwesomeIcon icon={faShare} />Share</div>
-     </div>
-     <hr />
- </div>
 
 <div className="post">
 <div className="postheader">
@@ -147,22 +197,8 @@ or other specific organizations that also use the term.
      <hr />
     </div>
 
-<div className="post">
-<div className="postheader">
-<img alt="profile" className="profilePhoto" src="https://www.lumosia.com/wp-content/uploads/2020/04/How-to-choose-a-headshot-Photographer-1-1024x683.jpg"/>
-<span className="profileName"> Messi <br />  18-July-2013</span>
-</div>
- This article is about the decentralized social movement. Not to be confused with Black Lives Matter Global Network Foundation, 
-or other specific organizations that also use the term.
-<img  alt="postimage" className="postImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeNeWtl1XStycUQShxOYPR_LagbC6eRVZbZufKElGAH3Mvjnbr5n3qXVXdrQWaRfqBRok&usqp=CAU"/>
-<hr />
-    <div className='postFooter'>
-       <div><FontAwesomeIcon icon={faThumbsUp} />Like</div>
-       <div><FontAwesomeIcon icon={faComment} />Comment</div>
-       <div><FontAwesomeIcon icon={faShare} />Share</div>
-     </div>
-     <hr />
-         </div> */}
-    </div>);
+    </div>)
+;
 }
+
 export default Centerpost;

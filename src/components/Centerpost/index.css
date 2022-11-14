@@ -1,35 +1,35 @@
 .centerpost{
     display: flex;
     flex-direction: column;align-items: center;
-background-color:#F0F2F5;}
+    background-color:#F0F2F5;}
 .Capture{    
     width: 520px;
     box-shadow: 1px 1px 3px 3px black;
-margin-bottom: 2px;
-margin-top: 30px; 
-   border-radius: 10px;
-height: 350px;
+    margin-bottom: 2px;
+    margin-top: 30px; 
+    border-radius: 10px;
+    height: 350px;
 }
 .dopost{
     display: flex;
     background-color: white;
-padding: 10px;
-margin: 20px;
-border-radius: 10px;
-width: 490px;
-height: 120px;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 10px;
+    width: 490px;
+    height: 100px;
 }
-.box{
+.inp{
     padding: 5px;
     border: none;
     border-radius: 30px;
-    width: 400px;
+    width: 350px;
     height: 30px;
-background-color: #F0F2F5;}
+    background-color: #F0F2F5;}
 
 .emoji{
         display: flex;
-    justify-content:space-between;
+        justify-content:space-between;
     }
 
 #photo{
@@ -45,8 +45,10 @@ width: 0px;}
     margin-bottom: 10px;
 }
 
-    .postheader{display: flex;align-items: center;margin-bottom: 2px;}
- .post .profilePhoto{width: 55px;height: 50px;border-radius: 50%;margin: 10px;}
+.postheader{
+        display: flex;align-items: center;margin-bottom: 2px;}
+ .post .profilePhoto{
+    width: 55px;height: 50px;border-radius: 50%;margin: 10px;}
  .post .postImage{
     width: 450px;height: 330px;margin-top: 5px;
     margin-bottom: 5px;}
