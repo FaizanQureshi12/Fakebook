@@ -2,11 +2,12 @@ import "./leftbar.css"
 
 function Leftbar (){
     return(
-        <div className="leftbar">
+        <div></div>
+        // <div className="leftbar">
 
-        {/* <img src="images/leftbar.PNG" className="leftbar" alt="" /> */}
+        // <img src="images/leftbar.PNG" className="leftbar" alt="" />
 
-        </div>
+        // </div>
 
     );
 }
