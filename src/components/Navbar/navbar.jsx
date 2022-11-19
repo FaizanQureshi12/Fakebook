@@ -12,7 +12,9 @@ function Navbar(){
         <input type="search" placeholder='Search Facebook' id="inp" />
         <div className="hlink">  
         <img src="images/home.png" className='home' alt="" />
-        <MdOndemandVideo className="home"/ >          
+        <MdOndemandVideo className="home"/ > 
+        {/* { (page ==='Profile')?<Profile/>:null} */}
+         
               <img src="images/group.png" className='group' alt="" />
               <SiFacebookgaming className="home"/>
               </div>
