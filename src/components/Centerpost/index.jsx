@@ -5,7 +5,10 @@ import { faThumbsUp, faComment, faShare } from '@fortawesome/free-solid-svg-icon
 function Centerpost() {
  
 return (
+
+
   <div className="centerpost">
+    <img src="images/Capture 2.png" className="Capture" alt="" />
 
       <div className="post">
         <div className="postheader">

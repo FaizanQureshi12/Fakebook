@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react';
 import { Route, Routes, Link, Navigate } from 'react-router-dom'
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import Profile from './components/Profile/profile';
-import Signup from './components/Login/signup';
+// import Signup from './components/Login/signup';
 import Login from './components/Login/login';
-// import Centerpost from "./components/Centerpost"
-// import Navbar from './components/Navbar/navbar'
+import Centerpost from "./components/Centerpost"
+import Navbar from './components/Navbar/navbar'
 // import Leftbar from "./components/Leftbar/leftbar"
 // import Rightbar from "./components/Rightbar/rightbar"
 
@@ -53,46 +53,61 @@ function App() {
 
   return (
     <div>
-      <button onClick={() => { setIsLogin(!isLogin) }}>Toggle</button>
+      {/* <button onClick={() => { setIsLogin(!isLogin) }}>Toggle</button> */}
 
-      {(isLogin) ?
-        <ul>
+      {/* {(isLogin) ?
+        <ul className=''>
           <li> <Link to={'profile'}>Profile</Link>  </li>
-          <li><button onClick={logoutHandler}>logout</button></li>
+          <li> <Link to={'centerpost'}>Home</Link>  </li>
+          <li> <Link to={'Login'} >
+            <button onClick={logoutHandler}>logout</button></Link></li>
+          <li> </li><Centerpost/>
         </ul>
-        :
-        // null
-        // <ul>
-        //     <li> <Link to={'/'}>Login</Link>  </li>
-        //   <li> <Link to={'profile'}>mystroy</Link>  </li>
-        // </ul>
-        <Login />
-      }
-      {/* {(signOut)? : } */}
+                 
+:
+        null
+        <ul>
+            <li> <Link to={'/'}>Login</Link>  </li>
+          <li> <Link to={'profile'}>mystroy</Link>  </li>
+        </ul>
+        <Centerpost/>
+      <Login/>
+      } */}
 
-      {(isLogin) ?
+      {/* {(Login ==='Centerpost')?<Centerpost/> : null} */}
+      
+      <Routes>
+ {/* <Route path="profile" element={
+          <div> <Navbar/>
+          <Profile />
+          </div> } />
+          <Route path="centerpost" element={
+          <div> <Navbar/>
+          <Centerpost/>
+          </div> } />
+          <Route path="login" element={ <Login/>
+            } />
+          <Route path="*" element={
+            <div>Page Not Found</div>} /> */}
+      </Routes>
+        {/* {(isLogin) ?
 
         <Routes>
-          {/* <Route path="/" element={<Login />} /> */}
-          <Route path="profile" element={<Profile />} />
-          <Route path="profile" element={
-            <button onClick={logoutHandler}>logout</button>} />
-          <Route path="*" element={
-            <div>Page Not Found</div>} />
+         
         </Routes>
         :
+         null
         <Routes>
-          <Route path="/" element={<Login />} />
-          {/* <Route path="profile" element={<Profile />} /> */}
+          <Route path="profile" element={<Profile />} />
+          <Route path="centerpost" element={<Centerpost />} />
           <Route path="*" element={
             <Navigate to="/" replace={true} />} />
         </Routes>
-      }
+      } */}
       {/* <Signup/> */}
       {/* <Leftbar />  <Rightbar /> */}
-
-      {/* <Navbar />
-            <Centerpost /> */}
+         <Navbar/>
+            <Centerpost />
       {/* 
     <button onClick={()=>{setPage('Login')}}>Login </button>
     <button onClick={()=>{setPage('Profile')}}> Profile</button>

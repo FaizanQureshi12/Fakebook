@@ -33,8 +33,8 @@ function Login() {
                 Email : <input type="email" name="username" placeholder='Email'
                     onChange={(e) => { setEmail(e.target.value) }} />
                 <br />
-                Password :<input type="password" name="current-password" autoComplete='current-password'
-                    placeholder='password' onChange={(e) => { setPassword(e.target.value) }} />
+                Password :<input type="Password"  
+                    placeholder='password' onChange={(e) => { setPassword(e.target.value) }}  />
                 <br />
                 <button type='submit'>Login</button>
                 <Link to={SignUp}>Create an Account</Link>
