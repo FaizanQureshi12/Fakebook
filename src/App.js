@@ -9,7 +9,7 @@ import Profile from './components/Profile/profile';
 import Login from './components/Login/login';
 import Centerpost from "./components/Centerpost"
 import Navbar from './components/Navbar/navbar'
-// import Leftbar from "./components/Leftbar/leftbar"
+import Leftbar from "./components/Leftbar/leftbar"
 // import Rightbar from "./components/Rightbar/rightbar"
 
 
@@ -105,7 +105,8 @@ function App() {
         </Routes>
       } */}
       {/* <Signup/> */}
-      {/* <Leftbar />  <Rightbar /> */}
+      <Leftbar /> 
+       {/* <Rightbar /> */}
          <Navbar/>
             <Centerpost />
       {/* 

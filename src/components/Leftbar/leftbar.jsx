@@ -2,12 +2,19 @@ import "./leftbar.css"
 
 function Leftbar (){
     return(
-        <div></div>
-        // <div className="leftbar">
+        <div className="leftbar">
+        {/* <img src="images/leftbar.PNG" className="leftbar" alt="" /> */}
+<p>Friends</p> 
 
-        // <img src="images/leftbar.PNG" className="leftbar" alt="" />
-
-        // </div>
+https://web.facebook.com/groups/?ref=bookmarks
+Groups <br />
+Pages  <br />
+Most Recent  <br />
+Marketplace <br />
+Watch <br />
+Memories <br />
+See more <hr />
+        </div>
 
     );
 }
