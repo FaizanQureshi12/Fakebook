@@ -2,14 +2,17 @@ import './profile.css'
 import moment from 'moment'
 import { useState, useEffect } from 'react'
 import { BsEmojiSmile } from 'react-icons/bs';
-import { initializeApp } from "firebase/app";
 import { MdAddAPhoto } from 'react-icons/md';
 import { AiOutlineVideoCameraAdd } from 'react-icons/ai';
-import { getAuth, } from 'firebase/auth';
 import {
   getFirestore, onSnapshot, query, serverTimestamp, orderBy,
   deleteDoc, collection, addDoc, doc, updateDoc,
 } from "firebase/firestore";
+// import { getAuth } from 'firebase/auth';
+import { initializeApp } from "firebase/app";
+import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage'
+import { v4 } from 'uuid'
+import { getStorage } from "firebase/storage";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -24,11 +27,14 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const auth = getAuth(app)
+//  const auth = getAuth(app);
+const storage = getStorage(app)
 
 function Profile() {
   const [postText, setPostText] = useState("");
   const [posts, setPosts] = useState([]);
+  const [imageUpload, setImageUpload] = useState(null)
+  const [imageList, setImageList] = useState([])
   const [editing, setEditing] = useState({
     editingId: null, editingText: ''
   })
@@ -43,6 +49,15 @@ function Profile() {
         querySnapshot.forEach((doc) => {
           posts.push({ id: doc.id, ...doc.data() });
         });
+        listAll(imageListRef).then((response) => {
+          response.items.forEach((item) => {
+            getDownloadURL(item).then((url) => {
+              setImageList((prev) => [...prev, url])
+            })
+          })
+          console.log(response);
+
+        })
         setPosts(posts);
         console.log("posts: ", posts);
       });
@@ -66,6 +81,18 @@ function Profile() {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
+  }
+
+  const imageListRef = ref(storage, 'images/')
+  const uploadImage = () => {
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+    uploadBytes(imageRef, imageUpload).then((snaphsot) => {
+      getDownloadURL(snaphsot.ref).then((url) => {
+        setImageList((prev) => [...prev, url])
+      })
+      alert('Image Uploaded')
+    })
   }
 
   const deletePost = async (postId) => {
@@ -101,16 +128,20 @@ function Profile() {
               setPostText(e.target.value)
             }}
           />
-          <button type="submit" >Post</button>
+          <button type="submit" onClick={uploadImage} >Post</button>
           <br />
           <hr />
 
           <div className="emoji">
             <AiOutlineVideoCameraAdd /> Live video
             <input type="file" name="photo"
-              id="photo" />
+              id="photo"
+              onChange={(e) => {
+                setImageUpload(e.target.files[0])
+              }}
+            />
             <MdAddAPhoto />
-            <label htmlFor="photo">Photo</label>
+            <label htmlFor="photo" >Photo</label>
             <BsEmojiSmile />Feeling/activity
           </div>
         </form>
@@ -139,14 +170,14 @@ function Profile() {
                 })
               }} >Edit</button>}
 
-            {/* <select name="" id="">
-        <option value="">
-          <button >Edit Post</button>
-        </option>
-        <option value=""></option>
-        <option value=""><button></button></option>
-        <option value=""><button></button></option>
-      </select> */}
+                    {/* <select name="" id="">
+                <option value="">
+                  <button >Edit Post</button>
+                </option>
+                <option value=""></option>
+                <option value=""><button></button></option>
+                <option value=""><button></button></option>
+              </select> */}
 
             <h5>
               {(eachPost.id === editing.editingId) ?
@@ -165,8 +196,13 @@ function Profile() {
                 :
                 eachPost?.text}
             </h5>
-          </div>
-        ))}
+           
+           </div>
+           
+          ))}
+          {imageList.map((url) => {
+              return<img width='400px' height='340px' src={url} />
+            })}
       </div>
 
     </div>

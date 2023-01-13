@@ -108,7 +108,8 @@ function App() {
       <Leftbar /> 
        {/* <Rightbar /> */}
          <Navbar/>
-            <Centerpost />
+            {/* <Centerpost /> */}
+            <Profile/>
       {/* 
     <button onClick={()=>{setPage('Login')}}>Login </button>
     <button onClick={()=>{setPage('Profile')}}> Profile</button>

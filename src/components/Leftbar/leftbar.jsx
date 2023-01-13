@@ -6,7 +6,6 @@ function Leftbar (){
         {/* <img src="images/leftbar.PNG" className="leftbar" alt="" /> */}
 <p>Friends</p> 
 
-https://web.facebook.com/groups/?ref=bookmarks
 Groups <br />
 Pages  <br />
 Most Recent  <br />
