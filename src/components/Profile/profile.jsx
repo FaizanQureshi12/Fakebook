@@ -4,15 +4,15 @@ import { useState, useEffect } from 'react'
 import { BsEmojiSmile } from 'react-icons/bs';
 import { MdAddAPhoto } from 'react-icons/md';
 import { AiOutlineVideoCameraAdd } from 'react-icons/ai';
+import Navbar from '../Navbar/navbar';
 import {
   getFirestore, onSnapshot, query, serverTimestamp, orderBy,
   deleteDoc, collection, addDoc, doc, updateDoc,
 } from "firebase/firestore";
 // import { getAuth } from 'firebase/auth';
 import { initializeApp } from "firebase/app";
-import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage'
+import { ref, list, uploadBytes, getStorage, listAll, getDownloadURL } from 'firebase/storage'
 import { v4 } from 'uuid'
-import { getStorage } from "firebase/storage";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -114,6 +114,7 @@ function Profile() {
   return (
 
     <div className='centerpost'>
+      <Navbar />
       <img src="images/Capture 2.png" className="Capture 2" alt="" />
 
       <div className="dopost">
@@ -170,7 +171,7 @@ function Profile() {
                 })
               }} >Edit</button>}
 
-                    {/* <select name="" id="">
+            {/* <select name="" id="">
                 <option value="">
                   <button >Edit Post</button>
                 </option>
@@ -196,15 +197,15 @@ function Profile() {
                 :
                 eachPost?.text}
             </h5>
-           
-           </div>
-           
-          ))}
-          {imageList.map((url) => {
-              return<img width='400px' height='340px' src={url} />
-            })}
-      </div>
+            {/* <img width='400px' height='340px' src={url} /> */}
+          </div>
 
+        ))}
+
+      </div>
+      {imageList.map((url) => {
+        return <img width='400px' height='340px' src={url} />
+      })}
     </div>
   );
 }
